@@ -1,0 +1,6 @@
+h2. AvtqHighrise
+
+This is a very simple gem offering a lightweight method to push leads from a webpage to highrise.
+
+* It creates a customer and tags it with given tags.
+* It creates a task assigned to a default user and associates the task with the potential customer.
