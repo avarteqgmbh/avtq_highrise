@@ -11,11 +11,12 @@ module Highrise
                            
       task                = Highrise::Task.new
       task.body           = "Lead von #{person.first_name} #{person.last_name} qualifizieren"
-      task.author_id      = lead["responsible_user_id"]
+      task.author_id      = lead["author_user_id"]
       task.owner_id       = lead["responsible_user_id"]
       task.category_id    = TASK_CATEGORY_ID_QUALIFY_LEAD
       task.subject_type   = "Party"
-      task.subject_id     = person.id                         
+      task.subject_id     = person.id     
+      task.notify         = true                    
       task.save!
       
       #TODO message
