@@ -14,4 +14,5 @@ module Highrise
   
   class Tag < Base
   end
+
 end
