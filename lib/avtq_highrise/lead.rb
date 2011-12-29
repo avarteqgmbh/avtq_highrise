@@ -34,8 +34,9 @@ module Highrise
     end
     
     def self.create_async(p = {})
+      
       p["rabbitmq"] ||= { "host" => "127.0.0.1" }
-      p["lead"] ||= {}
+      p["lead"] ||= {}   
       
       EventMachine.run do
         connection = AMQP.connect(p["rabbitmq"])
