@@ -3,12 +3,12 @@ module Highrise
     
     TASK_CATEGORY_ID_QUALIFY_LEAD = 3318802
     
-    def self.create(lead    = {})        
+    def self.create(lead = {})              
       person              = Highrise::Person.new
       person.first_name   = lead["firstname"]
       person.last_name    = lead["lastname"]
       person.save!         
-                           
+      
       task                = Highrise::Task.new
       task.body           = "Lead von #{person.first_name} #{person.last_name} qualifizieren"
       task.author_id      = lead["author_user_id"]
@@ -34,17 +34,17 @@ module Highrise
     end
     
     def self.create_async(p = {})
-      p[:host] ||= "127.0.0.1"
-      p[:lead] ||= {}
+      p["rabbitmq"] ||= { "host" => "127.0.0.1" }
+      p["lead"] ||= {}
       
       EventMachine.run do
-        connection = AMQP.connect(:host => p[:host])
+        connection = AMQP.connect(p["rabbitmq"])
 
         channel  = AMQP::Channel.new(connection)
         queue    = channel.queue('highrise_queue', :durable => true)
         exchange = channel.direct("")
 
-        message = p[:lead].to_json
+        message = p["lead"].to_json
     
         exchange.publish(message, :routing_key => queue.name, :persistent => true)
           
