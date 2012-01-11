@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    avtq_highrise (0.0.1)
+    avtq_highrise (1.0.1)
       activeresource
 
 GEM

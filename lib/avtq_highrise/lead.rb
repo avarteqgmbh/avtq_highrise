@@ -4,9 +4,14 @@ module Highrise
     TASK_CATEGORY_ID_QUALIFY_LEAD = 3318802
     
     def self.create(lead = {})              
-      person              = Highrise::Person.new
-      person.first_name   = lead["firstname"]
-      person.last_name    = lead["lastname"]
+      
+      #TODO With a little refactoring it's possible to shrink this to:
+      # Highrise::Person.new(lead["person"])
+      person = Highrise::Person.new(
+        "first_name"    => lead["firstname"], 
+        "last_name"     => lead["lastname"],
+        "contact_data"  => lead["contact_data"]
+      )
       person.save!         
       
       task                = Highrise::Task.new
