@@ -23,5 +23,7 @@ class Highrise::LeadTest < MiniTest::Unit::TestCase
     assert_equal(person.contact_data.email_addresses.size, 1)
     assert_instance_of(Highrise::Person::ContactData::EmailAddress, person.contact_data.email_addresses.first)
     assert_equal(person.contact_data.email_addresses.first.address, "me@mo.com")    
+    
+    assert person.save!
   end
 end
