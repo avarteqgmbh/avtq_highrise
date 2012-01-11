@@ -10,7 +10,7 @@ module Highrise
       person = Highrise::Person.new(
         "first_name"    => lead["firstname"], 
         "last_name"     => lead["lastname"],
-        "contact_data"  => lead["contact_data"]
+        "contact_data"  => {"email_addresses" => [{"address" => lead["email"], "location" => "Work"}]}
       )
       person.save!         
       
