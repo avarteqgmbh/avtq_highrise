@@ -52,10 +52,7 @@ module Highrise
 
         message = p["lead"].to_json
     
-        exchange.publish(message, :routing_key => queue.name, :persistent => true)
-          
-        # Disconnect & exit after 0.5 seconds
-        EventMachine.add_timer(0.5) do
+        exchange.publish(message, :routing_key => queue.name, :persistent => true) do
           exchange.delete
           connection.close { EventMachine.stop }
         end
